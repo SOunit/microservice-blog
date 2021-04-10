@@ -16,7 +16,7 @@ const CommentList = ({ postId }) => {
   }, []);
 
   const renderedComments = comments.map((comment) => {
-    return <li key={comments.id}>{comment.content}</li>;
+    return <li key={comment.id}>{comment.content}</li>;
   });
 
   return <ul>{renderedComments}</ul>;
