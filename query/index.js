@@ -12,11 +12,7 @@ app.get('/posts', (req, res) => {
   res.send(posts);
 });
 
-app.post('/events', (req, res) => {
-  const { type, data } = req.body;
-
-  console.log('Event Received:', type);
-
+const handleEvent = (type, data) => {
   if (type === 'PostCreated') {
     const { id, title } = data;
 
@@ -39,6 +35,14 @@ app.post('/events', (req, res) => {
     comment.content = content;
     comment.status = status;
   }
+};
+
+app.post('/events', (req, res) => {
+  const { type, data } = req.body;
+
+  console.log('Event Received:', type);
+
+  handleEvent(type, data);
 
   console.log(posts);
 
@@ -47,4 +51,11 @@ app.post('/events', (req, res) => {
 
 app.listen(4002, () => {
   console.log('Listening on 4002', 'query');
+
+  const res = axios.get('http://localhost:4005/events');
+
+  for (let event of res.data) {
+    console.log('Processing event:', event.type);
+    handleEvent(event.type, event.data);
+  }
 });
