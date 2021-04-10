@@ -1,3 +1,12 @@
+/**
+ * each post fetch data
+ * each comment fetch data too
+ * this approach makes a lot of request!!
+ *
+ * to prevent this, added query service
+ * query service has posts linked to comments
+ */
+
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -8,7 +17,7 @@ const PostList = () => {
   const [posts, setPosts] = useState({});
 
   const fetchPosts = async () => {
-    const res = await axios.get('http://localhost:4002/posts');
+    const res = await axios.get('http://localhost:4000/posts');
     setPosts(res.data);
   };
 
