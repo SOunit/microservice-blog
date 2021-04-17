@@ -15,7 +15,7 @@ app.post('/events', (req, res) => {
   console.log(events);
 
   // posts
-  axios.post('http://localhost:4000/events', event).catch((err) => {
+  axios.post('http://posts-clusterip-srv:4000/events', event).catch((err) => {
     console.log(err);
   });
   // comments
